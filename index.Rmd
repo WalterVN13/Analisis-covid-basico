@@ -32,6 +32,11 @@ covid <- read.csv(file = "05_10_22_CSV_GENERAL.csv", sep =";")
 covid$FECHA <- as.Date(covid$FECHA, format = "%d/%m/%Y")
 
 ```
+
+
+
+
+
 ### Opciones generales
 ```{r opciones-generales}
 options(scipen = 7)
@@ -104,6 +109,7 @@ axis(
   cex.axis = .7
 )
 ```
+
 ##### Gráfico de líneas de casos activos
 
 ```{r casos-covid- acumulados }
@@ -156,7 +162,67 @@ axis(
 
 ```
 
+#### Casoso diarios
 
+##### Positivos
 
+```{r casos-nuevos-positivos}
+# Gráfico de barras
+barplot(
+  height=covid$nue_posi,
+  names.arg=format(covid$FECHA, "%Y"),
+  ann = FALSE, 
+  bty = "n", 
+  tck = 0, 
+  xaxt = "n",
+  space = 1,
+  main= "Casos positivos por día",
+  xlab = "Fecha",
+  ylab = "Casos positivos",
+  col = "blue"
+)
 
+# Fechas minima y máxima
+x_min <- min(covid$FECHA)
+x_max <- max(covid$FECHA)
+
+# Formato del eje X
+axis(
+  side = 1,
+  at = match(seq(as.Date(x_min), x_max, "years"), covid$FECHA) * (1 + 1),
+  labels = format(seq(as.Date(x_min), x_max, "years"), "%Y"),
+  lwd = 0)
+
+```
+
+##### Fallecidos
+
+```{r casos_ fallecidos}
+# Gráfico de barras
+barplot(
+  height=covid$nue_falleci,
+  names.arg=format(covid$FECHA, "%Y"),
+  ann = FALSE, 
+  bty = "n", 
+  tck = 0, 
+  xaxt = "n",
+  space = 1,
+  main= "Casos fallecidos por día",
+  xlab = "Fecha",
+  ylab = "Casos fallecidos",
+  col = "black"
+)
+
+# Fechas minima y máxima
+x_min <- min(covid$FECHA)
+x_max <- max(covid$FECHA)
+
+# Formato del eje X
+axis(
+  side = 1,
+  at = match(seq(as.Date(x_min), x_max, "years"), covid$FECHA) * (1 + 1),
+  labels = format(seq(as.Date(x_min), x_max, "years"), "%Y"),
+  lwd = 0)
+
+```
 
