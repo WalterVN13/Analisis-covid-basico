@@ -76,6 +76,7 @@ axis(
 ```
 
 ##### Fallecidos
+
 ```{r casos-covid-fallecidos-acumulados}
 plot(covid$FECHA,
      covid$fallecidos,
@@ -103,4 +104,59 @@ axis(
   cex.axis = .7
 )
 ```
+##### Gráfico de líneas de casos activos
+
+```{r casos-covid- acumulados }
+plot(
+  covid$FECHA,
+     covid$positivos,
+     type = "l",
+     xaxt = "n",
+     yaxt = "n",
+     main = "casos acumulados COVID-19 en Costa Rica",
+     xlab ="Fecha", 
+     ylab ="Casos",
+  col = "blue" 
+      )
+# casos activos
+lines(covid$FECHA, covid$activos, col = "red")
+
+#casos recuperados
+lines(covid$FECHA, covid$RECUPERADOS, col = "green")
+
+#casos fallecidos
+lines(covid$FECHA, covid$fallecidos, col = "black")
+
+# Leyenda
+legend(
+  x = "topleft",
+  inset = 0.03,
+  legend = c("Positivos", "Activos", "Recuperados", "Fallecidos"),
+  col = c("blue", "red", "green", "black"),
+  lty = 1,
+  cex = 0.7
+)
+
+# Formato eje x
+axis(
+  side = 1,
+  covid$FECHA,
+  tick = FALSE,
+  format(covid$FECHA, "%m-%y"),
+  cex.axis = 0.7
+  )
+# Formato del eje y
+axis(
+  side = 2,
+  covid$fallecidos,
+  labels = TRUE,  
+  at = seq(0, 1000000, by = 200000),
+  cex.axis = .7
+)
+
+```
+
+
+
+
 
